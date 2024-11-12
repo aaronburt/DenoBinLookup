@@ -1,8 +1,10 @@
 import { Database } from "jsr:@db/sqlite@0.11";
 
-Deno.serve({ port: 80 }, async(req: Request) => {
+const db: Database = new Database("bin-list.db");
+const PORT = Number(Deno.env.get('PORT')) || 8080;
+
+Deno.serve({ port: PORT }, async(req: Request) => {
   try {
-    const db = new Database("bin-list.db");
 
     const url = new URL(req.url);
     const params = new URLSearchParams(url.search);
@@ -10,6 +12,11 @@ Deno.serve({ port: 80 }, async(req: Request) => {
     if(url.pathname === '/') {
       const htmlContent = await Deno.readTextFile("./static/index.html");
       return new Response(htmlContent, { headers: { "content-type": "text/html; charset=utf-8" } });
+    }
+
+    if(url.pathname === '/service-worker.js') {
+      const htmlContent = await Deno.readTextFile("./static/service-worker.js");
+      return new Response(htmlContent, { headers: { "content-type": "text/javascript" } });
     }
 
     if(url.pathname === '/favicon.ico') {
