@@ -4,6 +4,23 @@
 
 The BIN/IIN Lookup Service is a simple web application that allows users to search for information about Bank Identification Numbers (BINs). A BIN is the first six digits of a payment card number and is used to identify the issuing institution. This service reads from a [CSV file](https://github.com/venelinkochev/bin-list-data) containing BIN data and returns detailed information in JSON format.
 
+
+### Development
+
+```
+deno task dev
+```
+
+### Production (Runtime)
+
+```
+deno task runtime
+```
+### Deno Compile 
+
+```
+deno task compile
+```
 ### Environment
 Built with DENO 2.0.6 (Windows)
 
